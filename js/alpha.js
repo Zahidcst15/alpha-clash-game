@@ -9,6 +9,34 @@ function play(){
     continueGame();
 }
 
+function handelKeyboardButtonPress(event){
+    const playerPressed = event.key;
+
+    // get the expected to press
+    const currentAlphabetElement = document.getElementById('current-alphabet');
+    const currentAlphabet = currentAlphabetElement.innerText;
+    const  expectedAlphabet = currentAlphabet.toLowerCase();
+
+
+    // check matched or not
+    if(playerPressed === expectedAlphabet){
+        removeBackgroundColorById(expectedAlphabet);
+        continueGame();
+    }
+    else{
+        console.log('game over'); 
+    }
+}
+
+    // capture keyboard key press
+document.addEventListener('keyup', handelKeyboardButtonPress );
+
+
+
+
+
+
+
 function continueGame(){
     const alphabet = getARandomAlphabet();
 
@@ -17,7 +45,7 @@ function continueGame(){
     currentAlphabetElement.innerText = alphabet;
 
     // set background color
-    addBgHighLightColor(alphabet);
+    addBackgroundColorById(alphabet);
 }
 
 function getARandomAlphabet(){
@@ -37,7 +65,12 @@ function getARandomAlphabet(){
 }
 
 
-function addBgHighLightColor(elementId) {
+function addBackgroundColorById(elementId) {
    const element = document.getElementById(elementId);
    element.classList.add('bg-warning');
+}
+
+function removeBackgroundColorById(elementId) {
+   const element = document.getElementById(elementId);
+   element.classList.remove('bg-warning');
 }
