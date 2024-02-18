@@ -20,20 +20,25 @@ function handelKeyboardButtonPress(event){
 
     // check matched or not
     if(playerPressed === expectedAlphabet){
+
+        // update game point score
+        const currentScore = getTextElementValueById('current-score');
+        const updateScore = currentScore + 1;
+        setTextElementValueById('current-score', updateScore);
+
+        // start a new round
         removeBackgroundColorById(expectedAlphabet);
         continueGame();
     }
     else{
-        console.log('game over'); 
+        const currentLife = getTextElementValueById('initial-life');
+        const updatedLife = currentLife - 1;
+        setTextElementValueById('initial-life', updatedLife);
     }
 }
 
     // capture keyboard key press
 document.addEventListener('keyup', handelKeyboardButtonPress );
-
-
-
-
 
 
 
@@ -73,4 +78,17 @@ function addBackgroundColorById(elementId) {
 function removeBackgroundColorById(elementId) {
    const element = document.getElementById(elementId);
    element.classList.remove('bg-warning');
+}
+
+
+function getTextElementValueById(elementId){
+   const element = document.getElementById(elementId);
+   const elementValueText = element.innerText;
+   const value = parseInt(elementValueText);
+   return value;
+}
+
+function setTextElementValueById(elementId, value){
+    const element = document.getElementById(elementId);
+    element.innerText = value;
 }
